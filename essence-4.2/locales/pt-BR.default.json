@@ -1,0 +1,186 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Pular para o conteúdo",
+      "refresh_page": "Ao escolher uma seleção, a página inteira é atualizada.",
+      "link_messages": {
+        "new_window": "Abre em uma nova janela."
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "search": "Pesquisar",
+      "account": "Conta",
+      "favorites": "Favoritos",
+      "cart": "Carrinho"
+    },
+    "announcement_bar": {
+      "contact": "Atendimento",
+      "phone": "Telefone",
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "hours": "Horário"
+    },
+    "help": {
+      "button_text": "Ajuda?",
+      "button_label": "Ajuda",
+      "promotions": "Promoções em Alta",
+      "buy_with_attendant": "Comprar com Atendente",
+      "faq": "Perguntas Frequentes",
+      "track_order": "Rastreie seu pedido"
+    },
+    "search": {
+      "placeholder": "Pesquisar...",
+      "label": "Buscar produtos",
+      "submit": "Enviar busca",
+      "close": "Fechar busca",
+      "popular": "Mais buscados",
+      "no_results": "Nenhum resultado encontrado"
+    },
+    "cart": {
+      "title": "Seu Carrinho",
+      "close": "Fechar carrinho",
+      "empty": "Seu carrinho está vazio",
+      "continue_shopping": "Continuar comprando",
+      "subtotal": "Subtotal",
+      "shipping_note": "Frete e taxas calculados no checkout",
+      "checkout": "Finalizar Compra",
+      "cart_error": "Houve um erro ao adicionar o item ao carrinho",
+      "quantity_error": "Quantidade inválida",
+      "remove": "Remover"
+    },
+    "newsletter": {
+      "title": "Assine nossa newsletter",
+      "subtitle": "Ganhe 10% de desconto no primeiro pedido",
+      "close": "Fechar popup",
+      "email_placeholder": "Digite seu email",
+      "email_label": "Email",
+      "privacy": "Respeitamos sua privacidade. Seus dados estão seguros."
+    },
+    "footer": {
+      "name": "Rodapé",
+      "about_us": "Sobre Nós",
+      "menu": "Menu",
+      "policies": "Políticas",
+      "newsletter_title": "Receba nossas promoções",
+      "newsletter_text": "Inscreva-se para receber descontos exclusivos no seu e-mail!",
+      "home": "Início",
+      "collections": "Coleções",
+      "catalog": "Catálogo",
+      "contact": "Entre em contato",
+      "track_order": "Rastrear Pedido",
+      "email_placeholder": "Email",
+      "email_label": "Digite seu email",
+      "subscribe": "Inscrever-se",
+      "copyright": "Todos direitos reservados.",
+      "security_text": "Compra 100% segura e protegida",
+      "payment_methods": "Formas de Pagamento",
+      "security_badges": "Proteção e Segurança",
+      "shipping": "Transportadoras"
+    },
+    "hero-slideshow": {
+      "name": "Slideshow Principal",
+      "presets": {
+        "name": "Slideshow Principal"
+      }
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar ao Carrinho",
+      "sold_out": "Esgotado",
+      "unavailable": "Indisponível"
+    }
+  },
+  "settings_schema": {
+    "colors": {
+      "name": "Cores",
+      "settings": {
+        "color_body_background": {
+          "label": "Fundo do corpo"
+        },
+        "color_body_text": {
+          "label": "Texto do corpo"
+        },
+        "color_accent": {
+          "label": "Cor de destaque"
+        },
+        "color_btn_bg": {
+          "label": "Fundo do botão"
+        },
+        "color_btn_text": {
+          "label": "Texto do botão"
+        },
+        "color_border": {
+          "label": "Cor da borda"
+        }
+      }
+    },
+    "typography": {
+      "name": "Tipografia",
+      "settings": {
+        "type_header_font": {
+          "label": "Fonte dos títulos"
+        },
+        "type_body_font": {
+          "label": "Fonte do corpo"
+        }
+      }
+    },
+    "social_media": {
+      "name": "Redes Sociais",
+      "settings": {
+        "social_facebook_link": {
+          "label": "Link do Facebook",
+          "info": "Cole a URL completa do seu Facebook"
+        },
+        "social_instagram_link": {
+          "label": "Link do Instagram",
+          "info": "Cole a URL completa do seu Instagram"
+        },
+        "social_tiktok_link": {
+          "label": "Link do TikTok",
+          "info": "Cole a URL completa do seu TikTok"
+        },
+        "social_youtube_link": {
+          "label": "Link do YouTube",
+          "info": "Cole a URL completa do seu YouTube"
+        },
+        "whatsapp_link": {
+          "label": "Link do WhatsApp",
+          "info": "Ex: https://wa.me/5511999999999"
+        }
+      }
+    },
+    "footer": {
+      "name": "Rodapé",
+      "settings": {
+        "footer_description": {
+          "label": "Descrição da loja"
+        },
+        "show_payment_icons": {
+          "label": "Mostrar ícones de pagamento"
+        }
+      }
+    },
+    "cart": {
+      "name": "Carrinho",
+      "settings": {
+        "cart_drawer_enabled": {
+          "label": "Ativar gaveta do carrinho"
+        },
+        "show_cart_note": {
+          "label": "Mostrar nota no carrinho"
+        }
+      }
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Pular para o conteúdo",
+    "refresh_page": "Ao escolher uma seleção, a página inteira é atualizada.",
+    "link_messages": {
+      "new_window": "Abre em uma nova janela."
+    }
+  }
+}

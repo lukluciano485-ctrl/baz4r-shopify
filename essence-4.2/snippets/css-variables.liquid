@@ -1,0 +1,53 @@
+{% style %}
+  :root {
+    /* Tipografia */
+    --font-body-family: '{{ settings.type_body_font.family }}', {{ settings.type_body_font.fallback_families }};
+    --font-body-weight: {{ settings.type_body_font.weight }};
+    --font-heading-family: '{{ settings.type_header_font.family }}', {{ settings.type_header_font.fallback_families }};
+    --font-heading-weight: {{ settings.type_header_font.weight }};
+    --default-text-font-size: {{ settings.base_text_font_size }}px;
+    --base-text-font-size: {{ settings.base_text_font_size }}px;
+    --header-height: 60px;
+
+    /* Cores */
+    --color-body-background: {{ settings.color_background }};
+    --color-body-background-light: #f5f5f5;
+    --color-body-text: {{ settings.color_text }};
+    --color-secondary-text: #6c757d;
+    --color-subtext: #939393;
+    --color-accent: {{ settings.color_accent }};
+    --color-text-dark: #151515;
+    --color-text-light: #f8f8f8;
+    --color-heading: {{ settings.color_heading }};
+    --color-text-link: {{ settings.color_text_link }};
+    --color-text-link-hover: #939393;
+    --color-header-background: {{ settings.color_header_background }};
+    --color-header-text: {{ settings.color_header_text }};
+    --color-counters: #d80005;
+    --color-header-transparent-text: #ffffff;
+    --color-topbar-text: #ffffff;
+    --color-topbar-background: {{ settings.color_topbar_background }};
+    --color-btn-bg: {{ settings.color_button_background }};
+    --color-btn-bg-hover: {{ settings.color_button_background_hover }};
+    --color-btn-text: {{ settings.color_button_text }};
+    --color-btn-text-hover: {{ settings.color_button_text_hover }};
+    --color-btn-secondary-border: {{ settings.color_button_secondary_border }};
+    --color-btn-secondary-text: {{ settings.color_button_secondary_text }};
+    --color-image-background: #F1F1F1;
+    --color-border: #E0E0E0;
+    --color-disabled: #b0b0b0;
+    --color-success: #3a8735;
+    --color-error: #B55B5B;
+    --color-product-title: {{ settings.color_product_title }};
+    --color-product-sale-price: {{ settings.color_product_sale_price }};
+    --color-product-regular-price: {{ settings.color_product_regular_price }};
+    --color-product-label-sale-bg: #ff7a00;
+    --color-product-label-sold-bg: #b0b0b0;
+    --color-product-label-sold: #ffffff;
+    --color-tooltip-bg: #1c1c1c;
+    --color-tooltip-text: #f8f8f8;
+    --footer-background: {{ settings.footer_background }};
+    --footer-color-text: {{ settings.footer_color_text }};
+    --footer-color-heading: {{ settings.footer_color_heading }};
+  }
+{% endstyle %}

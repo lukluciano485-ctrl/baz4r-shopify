@@ -1,0 +1,163 @@
+{% comment %}
+  Product Card Snippet - Essence 4.2
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_image = product.featured_media.preview_image
+  assign second_image = product.media[1].preview_image
+  assign on_sale = false
+  if current_variant.compare_at_price > current_variant.price
+    assign on_sale = true
+    assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price
+  endif
+  assign sold_out = true
+  if product.available
+    assign sold_out = false
+  endif
+-%}
+
+<div class="product-card" data-product-id="{{ product.id }}">
+  <div class="product-card__container">
+    
+    <!-- Topo: imagem + badges + botões -->
+    <div class="product-card__top">
+      <div class="product-card__media relative image-hover">
+        
+        <!-- Badge de desconto -->
+        {%- if on_sale -%}
+          <span class="discount_card">-{{ discount }}%</span>
+        {%- endif -%}
+        
+        <!-- Imagem principal -->
+        <div class="media media--square">
+          {%- if featured_image -%}
+            <img src="{{ featured_image | image_url: width: 700 }}" 
+                 alt="{{ product.title | escape }}" 
+                 loading="lazy" 
+                 class="pr-image primary-img"
+                 width="700"
+                 height="700">
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        
+        <!-- Segunda imagem (hover) -->
+        {%- if second_image -%}
+          <div class="media media--square secondary-img">
+            <img src="{{ second_image | image_url: width: 700 }}" 
+                 alt="" 
+                 loading="lazy" 
+                 class="pr-image">
+          </div>
+        {%- endif -%}
+        
+        <!-- Link fullcard -->
+        <a href="{{ product.url }}" class="wide-link">
+          <span class="visually-hidden">{{ product.title }}</span>
+        </a>
+        
+      </div>
+      
+      <!-- Badge label (opcional: Novo, Esgotado) -->
+      {%- if sold_out -%}
+        <div class="product-card__label absolute">
+          <span style="background: var(--color-product-label-sold-bg); color: var(--color-product-label-sold); font-size: 11px; padding: 3px 8px; border-radius: 0 0 4px 0;">Esgotado</span>
+        </div>
+      {%- endif -%}
+      
+      <!-- Botões de ação (hover) -->
+      <div class="product-card__btns">
+        
+        <!-- Add to Cart -->
+        {%- unless sold_out -%}
+          <button class="product-btn add-to-cart-btn" 
+                  data-tooltip="Adicionar ao Carrinho"
+                  data-product-id="{{ product.id }}"
+                  data-variant-id="{{ current_variant.id }}"
+                  aria-label="Adicionar ao carrinho">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="btn-loader"><span class="spinner"></span></span>
+          </button>
+        {%- endunless -%}
+        
+        <!-- Quick View -->
+        <button class="product-btn product-qv-btn" 
+                data-quickview-url="{{ product.url }}?view=quickview" 
+                aria-label="Visualização rápida">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+        
+        <!-- Botão Adicionar Favorito -->
+        <button class="js-add-wishlist wishlist-btn product-btn" 
+                data-product-id="{{ product.id }}"
+                aria-label="Adicionar aos favoritos">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+        
+        <!-- Botão Remover Favorito (hidden por padrão) -->
+        <button class="js-remove-wishlist wishlist-btn wishlist-btn--active product-btn" 
+                data-product-id="{{ product.id }}"
+                aria-label="Remover dos favoritos"
+                style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+        
+      </div>
+    </div>
+    
+    <!-- Baixo: info do produto -->
+    <div class="product-card__bottom product-card__border">
+      
+      <!-- Título -->
+      <div class="product-card__title product-title">
+        <a href="{{ product.url }}">
+          <span>{{ product.title }}</span>
+        </a>
+      </div>
+      
+      <!-- Preços e info -->
+      <div class="product-card__info">
+        
+        {%- if on_sale -%}
+          <!-- Preço com desconto -->
+          <div class="card-price card-price--on-sale">
+            <div class="card-price__sale">
+              <span class="card-price__sale--discounted-from">{{ current_variant.compare_at_price | money_with_currency }}</span>
+            </div>
+          </div>
+        {%- endif -%}
+        
+        <!-- Preço PIX -->
+        <p class="card-pix">
+          <b>{{ current_variant.price | money }}</b>
+          <span>no PIX</span>
+        </p>
+        
+        <!-- Parcelamento -->
+        {%- liquid
+          assign parcelas = 6
+          assign valor_parcela = current_variant.price | divided_by: parcelas
+        -%}
+        <div class="card-parcela">
+          ou <span>{{ parcelas }}x de {{ valor_parcela | money }}</span>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+</div>

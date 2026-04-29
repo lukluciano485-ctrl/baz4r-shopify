@@ -1,0 +1,92 @@
+{%- style -%}
+  .menu-flutuante {
+    display: none;
+  }
+
+  @media (max-width: 700px) {
+    .menu-flutuante {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      justify-content: space-around;
+      background: #ffffff;
+      box-shadow: 0 -2px 6px rgba(32,33,36,0.28);
+      z-index: 100;
+      height: 70px;
+    }
+
+    .itens-menu {
+      color: #000;
+      align-self: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      gap: 4px;
+      font-size: 11px;
+      line-height: normal;
+      transition: all 0.1s ease;
+      cursor: pointer;
+    }
+
+    .itens-menu:hover {
+      transform: scale(1.1);
+    }
+
+    .itens-menu svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    html {
+      padding-bottom: 40px;
+    }
+  }
+{%- endstyle -%}
+
+<nav class="menu-flutuante" aria-label="Menu flutuante mobile">
+  <a href="{{ routes.all_products_collection_url }}" class="itens-menu" aria-label="Catálogo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7" height="7"></rect>
+      <rect x="14" y="3" width="7" height="7"></rect>
+      <rect x="14" y="14" width="7" height="7"></rect>
+      <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
+    Catálogo
+  </a>
+  
+  <a href="/collections/ofertas" class="itens-menu" aria-label="Ofertas">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+      <line x1="7" y1="7" x2="7.01" y2="7"></line>
+    </svg>
+    Ofertas
+  </a>
+  
+  <a href="{{ routes.account_url }}" class="itens-menu" aria-label="Conta">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+      <circle cx="12" cy="7" r="4"></circle>
+    </svg>
+    Conta
+  </a>
+  
+  <a href="{{ settings.social_instagram_link }}" class="itens-menu" aria-label="Siga-nos">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+    Siga-nos
+  </a>
+  
+  <a href="/pages/rastreio" class="itens-menu" aria-label="Rastreio">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+      <circle cx="12" cy="10" r="3"></circle>
+    </svg>
+    Rastreio
+  </a>
+</nav>
