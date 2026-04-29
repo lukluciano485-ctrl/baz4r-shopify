@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.primary_color }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {{ content_for_header }}
+
+    <!-- Customer Styles -->
+    {{ 'customer.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body class="template-customers">
+    <a class="skip-to-content-link sr-only" href="#MainContent">
+      Pular para o conteúdo
+    </a>
+
+    <header class="customer-header">
+      <div class="container">
+        <a href="{{ routes.root_url }}" class="customer-header__logo">
+          {%- if section.settings.logo != blank -%}
+            <img src="{{ section.settings.logo | image_url: width: 150 }}" alt="{{ shop.name }}">
+          {%- else -%}
+            {{ shop.name }}
+          {%- endif -%}
+        </a>
+      </div>
+    </header>
+
+    <main id="MainContent" class="content-for-layout" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    <footer class="customer-footer">
+      <div class="container">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+  </body>
+</html>

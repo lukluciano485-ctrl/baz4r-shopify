@@ -1,0 +1,128 @@
+{%- layout 'theme' -%}
+
+<div class="container">
+  <h1>{{ page_title }}</h1>
+
+  <div class="cart-page">
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-form">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th scope="col">Produto</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Total</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr class="cart-item-row">
+                <td data-label="Produto">
+                  <div class="cart-item-info">
+                    {%- if item.image -%}
+                      <img 
+                        src="{{ item.image | image_url: width: 100 }}" 
+                        alt="{{ item.image.alt | escape }}"
+                        loading="lazy"
+                      >
+                    {%- endif -%}
+                    <div>
+                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      {%- unless item.variant.title contains 'Default' -%}
+                        <p class="cart-item-variant">{{ item.variant.title }}</p>
+                      {%- endunless -%}
+                    </div>
+                  </div>
+                </td>
+                <td data-label="Preço">{{ item.original_price | money }}</td>
+                <td data-label="Quantidade">
+                  <input 
+                    type="number" 
+                    name="updates[]" 
+                    value="{{ item.quantity }}" 
+                    min="0"
+                    data-line="{{ forloop.index }}"
+                  >
+                </td>
+                <td data-label="Total">
+                  {%- if item.original_line_price != item.final_line_price -%}
+                    <span class="price--sale">{{ item.final_line_price | money }}</span>
+                    <span class="price--compare">{{ item.original_line_price | money }}</span>
+                  {%- else -%}
+                    {{ item.final_line_price | money }}
+                  {%- endif -%}
+                </td>
+                <td>
+                  <button 
+                    type="button" 
+                    class="cart-remove-btn" 
+                    data-remove-item
+                    data-index="{{ forloop.index }}"
+                  >
+                    Remover
+                  </button>
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="cart-footer">
+          <div class="cart-notes">
+            <label for="cart-notes">Instruções do pedido</label>
+            <textarea id="cart-notes" name="note">{{ cart.note }}</textarea>
+          </div>
+
+          <div class="cart-summary">
+            <div class="cart-subtotal">
+              <span>Subtotal:</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+
+            {%- if cart.cart_level_discount_applications.size > 0 -%}
+              <ul class="cart-discounts">
+                {%- for discount in cart.cart_level_discount_applications -%}
+                  <li>
+                    <span>{{ discount.title }}</span>
+                    <span>-{{ discount.total_allocated_amount | money }}</span>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            <p class="cart-shipping-note">
+              Frete e impostos calculados no checkout.
+            </p>
+
+            <button type="submit" class="btn btn--checkout" name="checkout">
+              Finalizar Compra
+            </button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <h2>Seu carrinho está vazio</h2>
+        <p>Parece que você ainda não adicionou nenhum produto ao carrinho.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn">
+          Continuar Comprando
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Carrinho",
+  "tag": "section",
+  "class": "section-cart"
+}
+{% endschema %}

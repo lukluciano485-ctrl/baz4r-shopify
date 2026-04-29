@@ -1,0 +1,53 @@
+<article class="article-card">
+  {%- if article.image -%}
+    <a href="{{ article.url }}" class="article-card__link">
+      <div class="article-card__image">
+        <img 
+          src="{{ article.image | image_url: width: 600 }}" 
+          alt="{{ article.image.alt | escape }}"
+          loading="lazy"
+          width="{{ article.image.width }}"
+          height="{{ article.image.height }}"
+        >
+      </div>
+    </a>
+  {%- endif -%}
+
+  <div class="article-card__info">
+    <h2 class="article-card__title">
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </h2>
+
+    {%- if article.author or article.published_at -%}
+      <div class="article-card__meta">
+        {%- if article.author -%}
+          <span class="article-card__author">{{ article.author }}</span>
+        {%- endif -%}
+        
+        {%- if article.published_at -%}
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" class="article-card__date">
+            {{ article.published_at | date: "%d de %B, %Y" }}
+          </time>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if article.excerpt.size > 0 -%}
+      <div class="article-card__excerpt rte">
+        {{ article.excerpt | strip_html | truncate: 150 }}
+      </div>
+    {%- elsif article.content.size > 0 -%}
+      <div class="article-card__excerpt rte">
+        {{ article.content | strip_html | truncate: 150 }}
+      </div>
+    {%- endif -%}
+
+    <a href="{{ article.url }}" class="article-card__link-text">
+      Ler mais
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+  </div>
+</article>

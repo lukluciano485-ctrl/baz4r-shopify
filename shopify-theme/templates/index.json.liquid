@@ -1,0 +1,185 @@
+{%- layout 'theme' -%}
+
+<div class="container">
+  <h1>{{ page_title }}</h1>
+
+  {%- if section.settings.show_hero_image and section.settings.hero_image != blank -%}
+    <div class="index-hero">
+      <img 
+        src="{{ section.settings.hero_image | image_url: width: 1600 }}" 
+        alt="{{ section.settings.hero_image.alt | escape }}"
+        loading="eager"
+      >
+      {%- if section.settings.hero_heading != blank or section.settings.hero_subheading != blank -%}
+        <div class="index-hero__content">
+          {%- if section.settings.hero_heading != blank -%}
+            <h2>{{ section.settings.hero_heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.hero_subheading != blank -%}
+            <p>{{ section.settings.hero_subheading }}</p>
+          {%- endif -%}
+          {%- if section.settings.hero_button_label != blank and section.settings.hero_button_link != blank -%}
+            <a href="{{ section.settings.hero_button_link }}" class="btn">
+              {{ section.settings.hero_button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_featured_collection and section.settings.featured_collection != blank -%}
+    <section class="index-featured-collection">
+      <h2>{{ section.settings.featured_collection_title | default: section.settings.featured_collection.title }}</h2>
+      
+      <div class="product-grid">
+        {%- for product in section.settings.featured_collection.products limit: section.settings.products_limit -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all -%}
+        <div class="index-featured-collection__view-all">
+          <a href="{{ section.settings.featured_collection.url }}" class="btn btn--secondary">
+            Ver Todos os Produtos
+          </a>
+        </div>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+
+  {%- if section.settings.show_newsletter_section -%}
+    <section class="index-newsletter">
+      <h2>{{ section.settings.newsletter_heading }}</h2>
+      <p>{{ section.settings.newsletter_description }}</p>
+      
+      {% form 'customer' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form">
+          <input 
+            type="email" 
+            name="contact[email]" 
+            placeholder="Seu email"
+            aria-label="Email para newsletter"
+            required
+          >
+          <button type="submit" class="btn">{{ section.settings.newsletter_button_text }}</button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="form-success">Obrigado por se inscrever!</p>
+        {%- endif -%}
+      {% endform %}
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Página Inicial",
+  "tag": "section",
+  "class": "section-index",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_image",
+      "label": "Mostrar Hero Image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagem Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Título Hero",
+      "default": "Bem-vindo à Nossa Loja"
+    },
+    {
+      "type": "text",
+      "id": "hero_subheading",
+      "label": "Subtítulo Hero",
+      "default": "Descubra nossos produtos incríveis"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Texto do Botão",
+      "default": "Comprar Agora"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Link do Botão"
+    },
+    {
+      "type": "header",
+      "content": "Coleção em Destaque"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_collection",
+      "label": "Mostrar Coleção em Destaque",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Coleção"
+    },
+    {
+      "type": "text",
+      "id": "featured_collection_title",
+      "label": "Título da Seção"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 2,
+      "max": 12,
+      "step": 2,
+      "label": "Número de Produtos",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Mostrar Botão Ver Todos",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter_section",
+      "label": "Mostrar Seção Newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Título da Newsletter",
+      "default": "Assine Nossa Newsletter"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_description",
+      "label": "Descrição",
+      "default": "Receba novidades e ofertas exclusivas no seu email."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_text",
+      "label": "Texto do Botão",
+      "default": "Inscrever-se"
+    }
+  ]
+}
+{% endschema %}

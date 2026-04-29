@@ -1,0 +1,29 @@
+{%- layout 'theme' -%}
+
+<div class="container">
+  <h1>{{ page_title }}</h1>
+  
+  {%- if blog.articles.size > 0 -%}
+    <div class="blog-grid">
+      {%- for article in blog.articles -%}
+        {% render 'article-card', article: article %}
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {% render 'pagination', paginate: paginate %}
+    {%- endif -%}
+  {%- else -%}
+    <div class="blog__empty">
+      <p>Nenhum artigo encontrado neste blog.</p>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "section",
+  "class": "section-blog"
+}
+{% endschema %}

@@ -1,0 +1,100 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Pular para o conteúdo"
+    },
+    "meta": {
+      "tags": "Tagged",
+      "page": "Página"
+    },
+    "404": {
+      "title": "Página não encontrada",
+      "subtext": "A página que você procura não existe."
+    },
+    "password_page": {
+      "opening_soon": "Abertura em breve"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu"
+    },
+    "cart": {
+      "title": "Seu carrinho",
+      "caption": "Itens do carrinho",
+      "remove_title": "Remover {{ title }}",
+      "subtotal": "Subtotal",
+      "new_subtotal": "Novo subtotal",
+      "note": "Instruções especiais do pedido",
+      "checkout": "Finalizar compra",
+      "empty": "Seu carrinho está vazio",
+      "continue_shopping": "Continuar comprando"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar ao carrinho",
+      "sold_out": "Esgotado",
+      "unavailable": "Indisponível",
+      "vendor": "Fabricante",
+      "quantity": "Quantidade",
+      "price": {
+        "from_price_html": "A partir de {{ price }}",
+        "regular_price": "Preço normal",
+        "sale_price": "Preço promocional"
+      }
+    }
+  },
+  "collections": {
+    "collection": {
+      "all": "Tudo",
+      "empty": "Nenhum produto encontrado",
+      "items_with_count": {
+        "one": "{{ count }} produto",
+        "other": "{{ count }} produtos"
+      }
+    },
+    "sorting": {
+      "title": "Ordenar por",
+      "manual": "Em destaque",
+      "best_selling": "Mais vendidos",
+      "az": "Alfabeticamente, A-Z",
+      "za": "Alfabeticamente, Z-A",
+      "price_ascending": "Preço, do menor para o maior",
+      "price_descending": "Preço, do maior para o menor",
+      "date_descending": "Data, mais recente primeiro",
+      "date_ascending": "Data, mais antiga primeiro"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Minha conta",
+      "details": "Detalhes da conta",
+      "view_addresses": "Ver endereços",
+      "return": "Voltar aos detalhes da conta"
+    },
+    "login": {
+      "title": "Entrar",
+      "email": "Email",
+      "password": "Senha",
+      "forgot_password": "Esqueceu sua senha?",
+      "sign_in": "Entrar",
+      "cancel": "Voltar à loja",
+      "guest_title": "Continuar como convidado",
+      "guest_continue": "Continuar"
+    },
+    "orders": {
+      "title": "Histórico de pedidos",
+      "order_number": "Pedido",
+      "order_number_link": "Pedido número {{ number }}",
+      "date": "Data",
+      "payment_status": "Status do pagamento",
+      "fulfillment_status": "Status de atendimento",
+      "total": "Total",
+      "none": "Você ainda não fez nenhum pedido."
+    }
+  },
+  "date_formats": {
+    "month_day_year": "%d de %B, %Y"
+  }
+}

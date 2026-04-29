@@ -1,0 +1,57 @@
+{%- if paginate.pages > 1 -%}
+<nav class="pagination" role="navigation" aria-label="Paginação">
+  <ul class="pagination__list">
+    {%- if paginate.previous -%}
+      <li class="pagination__item pagination__item--previous">
+        <a href="{{ paginate.previous.url }}" class="pagination__link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span class="sr-only">Anterior</span>
+        </a>
+      </li>
+    {%- else -%}
+      <li class="pagination__item pagination__item--disabled">
+        <span class="pagination__link pagination__link--disabled" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </span>
+      </li>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      <li class="pagination__item">
+        {%- if part.is_link -%}
+          <a href="{{ part.url }}" class="pagination__link">{{ part.title }}</a>
+        {%- else -%}
+          {%- if part.title == paginate.current_page -%}
+            <span class="pagination__link pagination__link--current" aria-current="page">{{ part.title }}</span>
+          {%- else -%}
+            <span class="pagination__link pagination__link--ellipsis">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <li class="pagination__item pagination__item--next">
+        <a href="{{ paginate.next.url }}" class="pagination__link">
+          <span class="sr-only">Próxima</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </li>
+    {%- else -%}
+      <li class="pagination__item pagination__item--disabled">
+        <span class="pagination__link pagination__link--disabled" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </span>
+      </li>
+    {%- endif -%}
+  </ul>
+</nav>
+{%- endif -%}

@@ -1,0 +1,83 @@
+{%- layout 'customer' -%}
+
+<div class="container">
+  <div class="customer-account">
+    <h1>{{ 'customer.account.title' | t }}</h1>
+
+    <a href="{{ routes.account_logout_url }}" class="btn btn--secondary">Sair</a>
+
+    <h2>{{ 'customer.account.details' | t }}</h2>
+    <p><strong>Nome:</strong> {{ customer.name }}</p>
+    <p><strong>Email:</strong> {{ customer.email }}</p>
+
+    <h2>{{ 'customer.orders.title' | t }}</h2>
+    
+    {%- if customer.orders.size > 0 -%}
+      <table class="customer-table">
+        <thead>
+          <tr>
+            <th scope="col">{{ 'customer.orders.order_number' | t }}</th>
+            <th scope="col">{{ 'customer.orders.date' | t }}</th>
+            <th scope="col">{{ 'customer.orders.payment_status' | t }}</th>
+            <th scope="col">{{ 'customer.orders.fulfillment_status' | t }}</th>
+            <th scope="col">{{ 'customer.orders.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for order in customer.orders -%}
+            <tr>
+              <td data-label="Pedido">
+                <a href="{{ order.customer_url }}">{{ order.name }}</a>
+              </td>
+              <td data-label="Data">{{ order.created_at | date: "%d/%m/%Y" }}</td>
+              <td data-label="Pagamento">
+                <span class="order-status order-status--{{ order.financial_status }}">
+                  {{ order.financial_status_label }}
+                </span>
+              </td>
+              <td data-label="Entrega">
+                <span class="order-status order-status--{{ order.fulfillment_status }}">
+                  {{ order.fulfillment_status_label }}
+                </span>
+              </td>
+              <td data-label="Total">{{ order.total_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    {%- else -%}
+      <p>{{ 'customer.orders.none' | t }}</p>
+    {%- endif -%}
+
+    <h2>Endereços</h2>
+    
+    {%- if customer.addresses.size > 0 -%}
+      <ul class="address-list">
+        {%- for address in customer.addresses -%}
+          <li class="address-item">
+            <h3>{{ address.first_name }} {{ address.last_name }}</h3>
+            <p>{{ address.street }}</p>
+            <p>{{ address.city }}, {{ address.province }} {{ address.zip }}</p>
+            <p>{{ address.country }}</p>
+            <p>{{ address.phone }}</p>
+            
+            <button type="button" data-address-id="{{ address.id }}" class="btn btn--secondary">
+              Editar
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p>Você ainda não cadastrou nenhum endereço.</p>
+    {%- endif -%}
+
+    <button type="button" class="btn" id="add-address-btn">Adicionar Endereço</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('add-address-btn').addEventListener('click', function() {
+    // Implementar modal de adição de endereço
+    alert('Funcionalidade de adicionar endereço em desenvolvimento');
+  });
+</script>

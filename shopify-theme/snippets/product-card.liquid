@@ -1,0 +1,76 @@
+<div class="product-card">
+  {%- if product.featured_media -%}
+    <a href="{{ product.url }}" class="product-card__link">
+      <div class="product-card__image">
+        <img 
+          src="{{ product.featured_media | image_url: width: 400 }}" 
+          alt="{{ product.featured_media.alt | escape }}"
+          loading="lazy"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+          {% if product.featured_media.media_type == 'model' %}
+            data-model-viewer
+            data-media-id="{{ product.featured_media.id }}"
+          {% endif %}
+        >
+      </div>
+    </a>
+  {%- else -%}
+    <div class="product-card__image product-card__image--placeholder">
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+
+  <div class="product-card__info">
+    {%- if product.vendor != blank -%}
+      <p class="product-card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="product-card__price">
+      {%- liquid
+        assign variant = product.selected_or_first_available_variant
+        if variant.compare_at_price > variant.price
+          assign on_sale = true
+          assign price = variant.price
+          assign compare_at_price = variant.compare_at_price
+        else
+          assign on_sale = false
+          assign price = variant.price
+        endif
+      -%}
+
+      {%- if on_sale -%}
+        <span class="price--sale">{{ price | money }}</span>
+        <span class="price--compare">{{ compare_at_price | money }}</span>
+      {%- else -%}
+        <span class="price--regular">{{ price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- unless product.available -%}
+      <p class="product-card__sold-out">Esgotado</p>
+    {%- endunless -%}
+
+    {%- if product.metafields.reviews.rating.value != blank -%}
+      <div class="product-card__rating">
+        {% liquid 
+          assign rating_decimal = 0
+          assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+          if decimal >= 0.3 and decimal <= 0.7
+            assign rating_decimal = 0.5
+          elsif decimal > 0.7
+            assign rating_decimal = 1
+          endif
+        %}
+        <span class="rating-stars" aria-label="{{ product.metafields.reviews.rating.value }} de 5 estrelas">
+          ★★★★★
+        </span>
+        <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<footer class="footer" role="contentinfo">
+  <div class="container footer__inner">
+    {%- if section.settings.show_newsletter -%}
+      <div class="footer__newsletter">
+        <h3>{{ section.settings.newsletter_heading }}</h3>
+        {% form 'customer' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-form">
+            <input 
+              type="email" 
+              name="contact[email]" 
+              placeholder="{{ section.settings.newsletter_placeholder }}"
+              aria-label="Email para newsletter"
+              required
+            >
+            <button type="submit" class="btn">{{ section.settings.newsletter_button_text }}</button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            <p class="form-success">Obrigado por se inscrever!</p>
+          {%- endif -%}
+        {% endform %}
+      </div>
+    {%- endif -%}
+
+    <div class="footer__links">
+      {%- if linklists.footer.links.size > 0 -%}
+        <ul>
+          {%- for link in linklists.footer.links -%}
+            <li>
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="footer__copyright">
+      <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. {{ section.settings.copyright_text }}</p>
+      {%- if section.settings.show_payment_icons -%}
+        <div class="footer__payment-icons">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Mostrar Newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Título da Newsletter",
+      "default": "Assine nossa newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder do Email",
+      "default": "Seu email"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_text",
+      "label": "Texto do Botão",
+      "default": "Inscrever"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Texto de Copyright",
+      "default": "Todos os direitos reservados."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Mostrar Ícones de Pagamento",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

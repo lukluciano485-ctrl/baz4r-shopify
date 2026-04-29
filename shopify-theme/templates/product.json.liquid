@@ -1,0 +1,18 @@
+{%- layout 'theme' -%}
+
+{% section 'main-product' %}
+
+{% schema %}
+{
+  "name": "Produto",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "product": "{{ product.id }}"
+      }
+    }
+  },
+  "order": ["main"]
+}
+{% endschema %}

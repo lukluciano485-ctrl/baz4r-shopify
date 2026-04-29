@@ -1,0 +1,138 @@
+{%- assign product = section.settings.product -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="container">
+  <div class="product" data-product-id="{{ product.id }}">
+    <div class="product__media">
+      {%- if product.featured_media -%}
+        <img 
+          src="{{ product.featured_media | image_url: width: 800 }}" 
+          alt="{{ product.featured_media.alt | escape }}"
+          loading="eager"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="product__info">
+      <h1 class="product__title">{{ product.title }}</h1>
+      
+      {%- if product.vendor != blank -%}
+        <p class="product__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <div class="product__price" data-price>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="price--sale">{{ current_variant.price | money }}</span>
+          <span class="price--compare">{{ current_variant.compare_at_price | money }}</span>
+        {%- else -%}
+          <span class="price--regular">{{ current_variant.price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if product.description != blank -%}
+        <div class="product__description rte">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+
+      {%- form 'product', product, id: 'product-form-' | append: section.id -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+        {%- if product.has_only_default_variant == false -%}
+          <div class="product__variants">
+            {%- for option in product.options_with_values -%}
+              <div class="variant-option">
+                <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                <select 
+                  id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                  name="options[{{ option.name }}]"
+                  data-option-index="{{ forloop.index0 }}"
+                >
+                  {%- for value in option.values -%}
+                    <option 
+                      value="{{ value | escape }}"
+                      {%- if option.selected_value == value %} selected{% endif -%}
+                    >
+                      {{ value }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div class="product__quantity">
+          <label for="Quantity-{{ section.id }}">Quantidade</label>
+          <input 
+            type="number" 
+            id="Quantity-{{ section.id }}" 
+            name="quantity" 
+            value="1" 
+            min="1"
+            step="1"
+          >
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn--add-to-cart"
+          {%- unless current_variant.available -%} disabled{%- endunless -%}
+          data-add-to-cart
+        >
+          {%- if current_variant.available -%}
+            Adicionar ao Carrinho
+          {%- else -%}
+            Esgotado
+          {%- endif -%}
+        </button>
+      {%- endform -%}
+
+      {%- if product.metafields.reviews.rating.value != blank -%}
+        <div class="product__reviews">
+          {% liquid 
+            assign rating_decimal = 0
+            assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+            if decimal >= 0.3 and decimal <= 0.7
+              assign rating_decimal = 0.5
+            elsif decimal > 0.7
+              assign rating_decimal = 1
+            endif
+          %}
+          <div 
+            class="rating"
+            role="img"
+            aria-label="{{ product.metafields.reviews.rating.value }} de 5 estrelas"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <defs>
+                <linearGradient id="gradient-{{ section.id }}">
+                  <stop offset="{{ rating_decimal | times: 100 }}%" stop-color="currentColor"/>
+                  <stop offset="{{ rating_decimal | times: 100 }}%" stop-color="#e5e5e5"/>
+                </linearGradient>
+              </defs>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Produto Principal",
+  "tag": "section",
+  "class": "section-product",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produto"
+    }
+  ]
+}
+{% endschema %}

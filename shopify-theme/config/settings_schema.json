@@ -1,0 +1,41 @@
+{
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configurações Gerais"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Texto do Logo",
+      "default": "Minha Loja"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Cor Primária",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Cor de Destaque",
+      "default": "#4CAF50"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Fonte do Corpo",
+      "default": "assistant_n4"
+    }
+  ],
+  "sections": {
+    "header": {
+      "type": "header"
+    },
+    "footer": {
+      "type": "footer"
+    }
+  },
+  "order": ["header", "footer"]
+}

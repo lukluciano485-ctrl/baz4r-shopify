@@ -1,0 +1,64 @@
+{%- layout 'theme' -%}
+
+<div class="container">
+  <div class="error-404">
+    <h1>{{ page_title }}</h1>
+    
+    <div class="error-content">
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      
+      <h2>Página não encontrada</h2>
+      <p>A página que você está procurando pode ter sido removida, teve seu nome alterado ou está temporariamente indisponível.</p>
+      
+      <div class="error-actions">
+        <a href="{{ routes.root_url }}" class="btn">
+          Voltar para a Página Inicial
+        </a>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--secondary">
+          Ver Produtos
+        </a>
+      </div>
+
+      {%- if section.settings.enable_search -%}
+        <div class="error-search">
+          <h3>Ou tente buscar:</h3>
+          <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+            <input 
+              type="search" 
+              name="q" 
+              placeholder="Buscar..."
+              aria-label="Buscar"
+            >
+            <button type="submit" class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span class="sr-only">Buscar</span>
+            </button>
+          </form>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Erro 404",
+  "tag": "section",
+  "class": "section-404",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_search",
+      "label": "Mostrar Busca",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

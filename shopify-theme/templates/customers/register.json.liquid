@@ -1,0 +1,66 @@
+{%- layout 'customer' -%}
+
+<div class="container">
+  <div class="customer-form">
+    <h1>Criar Conta</h1>
+
+    {%- form 'create_customer' -%}
+      {%- if form.errors -%}
+        <div class="form-errors" role="alert">
+          <h2>{{ form.errors | default_errors }}</h2>
+        </div>
+      {%- endif -%}
+
+      <div class="form-field">
+        <label for="first_name">Nome</label>
+        <input 
+          type="text" 
+          id="first_name" 
+          name="customer[first_name]" 
+          value="{{ form.first_name }}"
+          autocomplete="given-name"
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="last_name">Sobrenome</label>
+        <input 
+          type="text" 
+          id="last_name" 
+          name="customer[last_name]" 
+          value="{{ form.last_name }}"
+          autocomplete="family-name"
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="customer[email]" 
+          value="{{ form.email }}"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="password">Senha</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="customer[password]" 
+          autocomplete="new-password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn btn--full-width">Criar Conta</button>
+    {%- endform -%}
+
+    <hr>
+
+    <p>Já tem uma conta? <a href="{{ routes.account_login_url }}">Fazer login</a></p>
+  </div>
+</div>
