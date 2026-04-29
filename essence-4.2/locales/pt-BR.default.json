@@ -1,0 +1,26 @@
+{
+  "default": {
+    "layout": "theme",
+    "locales": {
+      "pt-BR": {
+        "general": {
+          "accessibility": {
+            "skip_to_content": "Pular para o conteúdo",
+            "close": "Fechar"
+          },
+          "meta": {
+            "tags": "Marcado \"{{ tags }}\"",
+            "page": "Página {{ page }}"
+          },
+          "404": {
+            "title": "Página não encontrada",
+            "subtext": "A página solicitada não existe."
+          },
+          "password_page": {
+            "opening_soon": "Abertura em breve"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+```
+# Shopify theme specific
+assets/*.css.liquid
+assets/*.js
+config/settings_data.json
+config/settings_schema.json
+layout/*.liquid
+locales/*.json
+sections/*.liquid
+snippets/*.liquid
+templates/*.json
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/
+*.min.js
+*.min.css
+```

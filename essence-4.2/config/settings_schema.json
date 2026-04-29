@@ -1,0 +1,20 @@
+{
+  "name": "Essence 4.2",
+  "version": "4.2.0",
+  "documentation_url": "https://help.shopify.com/manual/online-store/themes",
+  "author": {
+    "name": "NOWZecom",
+    "email": "support@nowzecom.com"
+  },
+  "license": "GPL-3.0",
+  "settings_schema": [
+    {
+      "name": "theme_info",
+      "theme_name": "Essence",
+      "theme_version": "4.2.0",
+      "theme_author": "NOWZecom",
+      "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+      "theme_support_url": "https://support.nowzecom.com"
+    }
+  ]
+}

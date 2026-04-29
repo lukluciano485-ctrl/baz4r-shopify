@@ -1,0 +1,44 @@
+{
+  "current": {
+    "type_header_font": {
+      "family": "Poppins",
+      "variant": "n4"
+    },
+    "type_body_font": {
+      "family": "Poppins",
+      "variant": "n4"
+    },
+    "color_background": "#ffffff",
+    "color_text": "#282828",
+    "color_heading": "#282828",
+    "color_accent": "#000000",
+    "color_button_background": "#000000",
+    "color_button_background_hover": "#333333",
+    "color_button_text": "#ffffff",
+    "color_button_text_hover": "#ffffff",
+    "color_button_secondary_border": "#000000",
+    "color_button_secondary_text": "#000000",
+    "color_header_background": "#ffffff",
+    "color_header_text": "#000000",
+    "color_topbar_background": "#000000",
+    "color_product_title": "#000000",
+    "color_product_sale_price": "#000000",
+    "color_product_regular_price": "#353535",
+    "footer_background": "#282828",
+    "footer_color_text": "#ffffff",
+    "footer_color_heading": "#ffffff",
+    "base_text_font_size": 14
+  },
+  "presets": {
+    "Essence Default": {
+      "type_header_font": {
+        "family": "Poppins",
+        "variant": "n4"
+      },
+      "type_body_font": {
+        "family": "Poppins",
+        "variant": "n4"
+      }
+    }
+  }
+}
