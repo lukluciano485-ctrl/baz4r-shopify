@@ -10,63 +10,25 @@
     },
     "hero-slideshow": {
       "type": "hero-slideshow",
-      "settings": {}
-    },
-    "marquee-text": {
-      "type": "marquee-text",
-      "settings": {}
-    },
-    "collections-carousel": {
-      "type": "collections-carousel",
-      "settings": {}
-    },
-    "featured-collection-mais-vendidos": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Mais Vendidos",
-        "collection": "all",
-        "section_bg_color": "#000000",
-        "section_text_color": "#ffffff"
-      }
-    },
-    "secondary-banner": {
-      "type": "secondary-banner",
-      "settings": {}
-    },
-    "featured-collection-saude-beleza": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Saúde & Beleza",
-        "collection": "saude-beleza",
-        "section_bg_color": "#ffffff",
-        "section_text_color": "#282828"
-      }
-    },
-    "image-grid-4cols": {
-      "type": "image-grid",
-      "settings": {
-        "title": "Veja nossas ofertas",
-        "columns_desktop": 4
-      }
-    },
-    "featured-collection-eletronicos": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Eletrônicos",
-        "collection": "eletronicos",
-        "section_bg_color": "#ffffff",
-        "section_text_color": "#282828"
-      }
-    },
-    "image-grid-3cols": {
-      "type": "image-grid",
-      "settings": {
-        "title": "",
-        "columns_desktop": 3
-      }
-    },
-    "features": {
-      "type": "features",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {}
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {}
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3"
+      ],
       "settings": {}
     },
     "footer": {
@@ -78,15 +40,6 @@
     "announcement-bar",
     "header",
     "hero-slideshow",
-    "marquee-text",
-    "collections-carousel",
-    "featured-collection-mais-vendidos",
-    "secondary-banner",
-    "featured-collection-saude-beleza",
-    "image-grid-4cols",
-    "featured-collection-eletronicos",
-    "image-grid-3cols",
-    "features",
     "footer"
   ]
 }

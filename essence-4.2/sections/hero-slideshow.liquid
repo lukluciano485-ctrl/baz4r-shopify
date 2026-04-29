@@ -1,0 +1,212 @@
+{%- liquid
+  assign section_id = 'hero-slideshow-' | append: section.id
+  assign desktop_height = section.settings.desktop_height
+  assign mobile_height = section.settings.mobile_height
+-%}
+
+<div class="hero-section" id="{{ section_id }}">
+  <div class="swiper hero-swiper">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="swiper-slide" {{ block.shopify_attributes }}>
+          {%- liquid
+            assign slide_link = block.settings.slide_link
+            assign desktop_image = block.settings.desktop_image
+            assign mobile_image = block.settings.mobile_image
+          -%}
+          
+          {%- if slide_link != blank -%}
+            <a href="{{ slide_link }}" class="hero-slide__link">
+          {%- endif -%}
+          
+          <div class="hero-slide__media">
+            {%- if desktop_image != blank -%}
+              <img 
+                src="{{ desktop_image | image_url: width: 1600 }}" 
+                alt="{{ desktop_image.alt | default: shop.name }}"
+                class="hero-slide__image d-none d-md-block"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                {% if forloop.first %}fetchpriority="high"{% endif %}
+              >
+            {%- endif -%}
+            
+            {%- if mobile_image != blank -%}
+              <img 
+                src="{{ mobile_image | image_url: width: 1080 }}" 
+                alt="{{ mobile_image.alt | default: shop.name }}"
+                class="hero-slide__image d-md-none"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+            {%- elsif desktop_image != blank -%}
+              <img 
+                src="{{ desktop_image | image_url: width: 1080 }}" 
+                alt="{{ desktop_image.alt | default: shop.name }}"
+                class="hero-slide__image d-md-none"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+            {%- endif -%}
+          </div>
+          
+          {%- if slide_link != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    
+    <!-- Navigation -->
+    <button class="swiper-button-prev hero-prev" aria-label="Anterior">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="swiper-button-next hero-next" aria-label="Próximo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+    
+    <!-- Pagination -->
+    <div class="swiper-pagination hero-pagination"></div>
+  </div>
+</div>
+
+<style>
+.hero-section { width: 100%; padding: 0; margin: 0; }
+.hero-swiper { width: 100%; height: 100%; }
+.hero-swiper .swiper-slide { position: relative; }
+.hero-slide__link { display: block; width: 100%; height: 100%; }
+.hero-slide__media { position: relative; width: 100%; height: 100%; overflow: hidden; background: #f5f5f5; }
+.hero-slide__image { width: 100%; height: 100%; object-fit: cover; }
+
+/* Desktop: proporção 3:1 */
+@media (min-width: 768px) {
+  .hero-section { padding-top: calc(100% / 3); }
+  .hero-swiper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+}
+
+/* Mobile: proporção 1:1 */
+@media (max-width: 767px) {
+  .hero-section { padding-top: 100%; }
+  .hero-swiper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+}
+
+/* Navigation buttons */
+.hero-swiper .swiper-button-prev,
+.hero-swiper .swiper-button-next {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.8);
+  color: #000;
+  transition: background 0.2s;
+}
+.hero-swiper .swiper-button-prev:hover,
+.hero-swiper .swiper-button-next:hover {
+  background: rgba(255,255,255,1);
+}
+.hero-swiper .swiper-button-prev:after,
+.hero-swiper .swiper-button-next:after {
+  content: '';
+  display: none;
+}
+
+/* Pagination */
+.hero-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.6);
+  opacity: 1;
+  transition: background 0.2s;
+}
+.hero-swiper .swiper-pagination-bullet-active {
+  background: #fff;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const heroSwiper = new Swiper('#{{ section_id }} .hero-swiper', {
+    loop: true,
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false
+    },
+    effect: 'slide',
+    speed: 800,
+    navigation: {
+      nextEl: '#{{ section_id }} .hero-next',
+      prevEl: '#{{ section_id }} .hero-prev'
+    },
+    pagination: {
+      el: '#{{ section_id }} .hero-pagination',
+      clickable: true
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.hero-slideshow.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "Altura Desktop",
+      "options": [
+        { "value": "small", "label": "Pequena" },
+        { "value": "medium", "label": "Média" },
+        { "value": "large", "label": "Grande" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "Altura Mobile",
+      "options": [
+        { "value": "small", "label": "Pequena" },
+        { "value": "medium", "label": "Média" },
+        { "value": "large", "label": "Grande" }
+      ],
+      "default": "medium"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Imagem Desktop (1600x533px)"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Imagem Mobile (1080x1080px)"
+        },
+        {
+          "type": "url",
+          "id": "slide_link",
+          "label": "Link do Slide"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.hero-slideshow.presets.name",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
